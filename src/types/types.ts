@@ -12,7 +12,7 @@ export interface APICountry {
 export interface Country {
     name: string;
     capital: string;
-    flag: string;
+    flags: string;
     favorite: boolean;
 }
 

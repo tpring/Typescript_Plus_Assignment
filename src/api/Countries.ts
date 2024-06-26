@@ -6,8 +6,8 @@ export const readCountry = async (): Promise<Country[]> => {
 
     return data.map((country: APICountry) => ({
         name: country.name.common,
-        capital: country.capital,
-        flag: country.flags.png,
+        capital: country.capital ? country.capital[0] : 'N/A',
+        flags: country.flags.png,
         favorite: false,
     }));
 };
