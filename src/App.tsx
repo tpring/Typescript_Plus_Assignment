@@ -1,35 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from 'react';
+import CountryList from './components/CountryList';
+import { readCountry } from './api/Countries';
+import { Country } from './types/types';
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [countries, setCountries] = useState<Country[]>([]);
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await readCountry();
+                const dataWithFavorite: Country[] = data.map((country) => ({
+                    ...country,
+                    favorite: false,
+                }));
+                setCountries(dataWithFavorite);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const favoriteCountries = countries.filter((country) => country.favorite);
+    const unfavoriteCountries = countries.filter((country) => !country.favorite);
+
+    return (
+        <div>
+            <CountryList title="Favorite Countries" countries={favoriteCountries} setCountries={setCountries} />
+            <CountryList title="Countries" countries={unfavoriteCountries} setCountries={setCountries} />
+        </div>
+    );
 }
 
-export default App
+export default App;
