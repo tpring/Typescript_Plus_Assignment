@@ -10,11 +10,7 @@ function App() {
         const fetchData = async () => {
             try {
                 const data = await readCountry();
-                const dataWithFavorite: Country[] = data.map((country) => ({
-                    ...country,
-                    favorite: false,
-                }));
-                setCountries(dataWithFavorite);
+                setCountries(data);
             } catch (error) {
                 console.error('Error:', error);
             }

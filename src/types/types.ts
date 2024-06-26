@@ -1,7 +1,18 @@
+export interface APICountry {
+    name: {
+        common: string;
+    };
+    capital: string;
+    flags: {
+        png: string;
+    };
+    favorite: boolean;
+}
+
 export interface Country {
     name: string;
     capital: string;
-    flag: string;
+    flags: string;
     favorite: boolean;
 }
 

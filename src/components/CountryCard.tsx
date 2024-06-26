@@ -17,7 +17,7 @@ const CountryCard: React.FC<CountryCardProps> = ({ countrie, setCountries }) => 
     return (
         <div>
             <ButtonToggle onClick={() => handleToggle(countrie.name)}>
-                <img src={countrie.flag} width="80" />
+                <img src={countrie.flags} width="80" />
                 <h3>{countrie.name}</h3>
                 <p>{countrie.capital}</p>
             </ButtonToggle>
