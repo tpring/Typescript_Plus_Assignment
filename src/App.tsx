@@ -5,6 +5,7 @@ import { Country } from './models/types';
 
 function App() {
     const [countries, setCountries] = useState<Country[]>([]);
+    // const [favoriteCountries, setFavoriteCountries] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -30,13 +31,18 @@ function App() {
         );
     };
 
-    const favoriteCountries = countries.filter((country) => country.favorite);
-    const unfavoriteCountries = countries.filter((country) => !country.favorite);
+    // useEffect(() => {
+    //     const favoriteCountry = countries.find((country) => country.favorite);
+    //     setFavoriteCountries(favoriteCountry);
+    // }, [countries]);
+
+    const favoriteCountry = countries.filter((country) => country.favorite);
+    const unfavoriteCountry = countries.filter((country) => !country.favorite);
 
     return (
         <div>
-            <CountryList title="Favorite Countries" countries={favoriteCountries} onClick={handleToggle} />
-            <CountryList title="Countries" countries={unfavoriteCountries} onClick={handleToggle} />
+            <CountryList title="Favorite Countries" countries={favoriteCountry} onClick={handleToggle} />
+            <CountryList title="Countries" countries={unfavoriteCountry} onClick={handleToggle} />
         </div>
     );
 }

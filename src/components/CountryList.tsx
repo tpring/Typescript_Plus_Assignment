@@ -13,10 +13,11 @@ const CountryList: React.FC<CountryListProps> = ({ title, countries, onClick }) 
         <div className="max-w-[1200px] mx-auto p-4">
             <h2 className="text-center text-xl font-semibold mt-14">{title}</h2>
             <div className="flex flex-wrap justify-center">
-                {countries.map((countrie, index) => (
-                    <div key={index} className="p-2">
+                {countries.map((countrie) => (
+                    <div key={countrie.name} className="p-2">
                         <button
-                            className="w-[180px] sm:w-[220px] h-[150px] bg-transparent rounded-lg shadow-lg hover:shadow-xl transition-transform transform"
+                            className={`w-[180px] sm:w-[220px] h-[150px] bg-transparent rounded-lg shadow-lg hover:shadow-xl transition-transform transform 
+                                ${title === 'Favorite Countries' ? 'border border-green-500' : ''}`}
                             onClick={() => onClick(countrie.name)}
                         >
                             <CountryCard countrie={countrie} />
