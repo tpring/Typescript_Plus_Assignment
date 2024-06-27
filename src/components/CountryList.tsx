@@ -1,30 +1,31 @@
 import React from 'react';
 import CountryCard from './CountryCard';
-import { CountryListProps } from '../types/types';
-import styled from 'styled-components';
+import { Country } from '../models/types';
 
-const CountryList: React.FC<CountryListProps> = ({ title, countries, setCountries }) => {
+interface CountryListProps {
+    title: string;
+    countries: Country[];
+    onClick: (countrieName: string) => void;
+}
+
+const CountryList: React.FC<CountryListProps> = ({ title, countries, onClick }) => {
     return (
-        <div>
-            <H2Title>{title}</H2Title>
-            <Wrapper>
+        <div className="max-w-[1200px] mx-auto p-4">
+            <h2 className="text-center text-xl font-semibold mt-14">{title}</h2>
+            <div className="flex flex-wrap justify-center">
                 {countries.map((countrie, index) => (
-                    <div key={index}>
-                        <CountryCard countrie={countrie} setCountries={setCountries} />
+                    <div key={index} className="p-2">
+                        <button
+                            className="w-[180px] sm:w-[220px] h-[150px] bg-transparent rounded-lg shadow-lg hover:shadow-xl transition-transform transform"
+                            onClick={() => onClick(countrie.name)}
+                        >
+                            <CountryCard countrie={countrie} />
+                        </button>
                     </div>
                 ))}
-            </Wrapper>
+            </div>
         </div>
     );
 };
 
 export default CountryList;
-
-const Wrapper = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-`;
-
-const H2Title = styled.h2`
-    text-align: center;
-`;

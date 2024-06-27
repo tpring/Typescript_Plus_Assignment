@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Country, APICountry } from '../types/types';
+import { Country, APICountry } from '../models/types';
 
 export const readCountry = async (): Promise<Country[]> => {
     const { data } = await axios.get('https://restcountries.com/v3.1/all');
